@@ -20,6 +20,31 @@ func (this *UserController) ShowRegister() {
 }
 
 func (this *UserController) HandleLogin() {
+	username := this.GetString("username")
+	password := this.GetString("pwd")
+
+	if username == "" || password == "" {
+		this.Data["err"] = "用户名或密码不能为空"
+		this.TplName = "login.html"
+		return
+	}
+
+	o := orm.NewOrm()
+	var user models.User
+	user.Username = username
+
+	err := o.Read(&user, "Username")
+
+	if err != nil || user.Password != password {
+		this.Data["err"] = "用户名或密码错误"
+		this.TplName = "login.html"
+		return
+	}
+
+	beego.Info("username是",username)
+
+	this.SetSession("username", username)
+	this.Redirect("/index", 302)
 
 }
 
