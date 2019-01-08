@@ -11,10 +11,14 @@ type GoodsController struct {
 }
 
 func (this *GoodsController) ShowIndex() {
-	username := this.GetSession("username").(string)
-	this.Data["username"] = username
-
-	this.TplName = "index.html"
+	username := this.GetSession("username")
+	if username != nil{
+		this.Data["username"] = username.(string)
+	}else {
+		this.Data["username"] = ""
+	}
+	this.Layout = "layout.html"//指定布局页面
+	this.TplName = "index.html"//显示主要页面
 }
 
 func (this *GoodsController) ShowUserCenterInfo() {
@@ -23,7 +27,7 @@ func (this *GoodsController) ShowUserCenterInfo() {
 	user.Username = username.(string)
 
 	o := orm.NewOrm()
-	o.Read(&user, "username")
+	o.Read(&user, "Username")
 
 	var addr models.Address
 	o.QueryTable("Address").RelatedSel("User").Filter("User__Id", user.Id).Filter("IsDefault", true).One(&addr)
@@ -32,6 +36,7 @@ func (this *GoodsController) ShowUserCenterInfo() {
 	this.Data["addr"] = addr
 	this.Data["username"] = username
 
+	this.Layout="layout.html"
 	this.TplName = "user_center_info.html"
 }
 
