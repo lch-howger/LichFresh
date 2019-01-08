@@ -68,7 +68,7 @@ func (this *UserController) HandleLogin() {
 	}
 
 	this.SetSession("username", username)
-	this.Redirect("/register", 302)
+	this.Redirect("/index", 302)
 
 }
 

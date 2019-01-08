@@ -12,4 +12,8 @@ func init() {
 	beego.Router("/active", &controllers.UserController{}, "get:HandleActive")
 
 	beego.Router("/index", &controllers.GoodsController{}, "get:ShowIndex")
+	beego.Router("/userCenterInfo", &controllers.GoodsController{}, "get:ShowUserCenterInfo")
+	beego.Router("/userCenterOrder", &controllers.GoodsController{}, "get:ShowUserCenterOrder")
+	beego.Router("/userCenterSite", &controllers.GoodsController{}, "get:ShowUserCenterSite")
+
 }
