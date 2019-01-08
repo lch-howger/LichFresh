@@ -7,5 +7,7 @@ type GoodsController struct {
 }
 
 func (this *GoodsController) ShowIndex() {
+	username := this.GetSession("username").(string)
+	this.Data["username"] = username
 	this.TplName = "index.html"
 }
