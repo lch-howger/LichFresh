@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
-	"regexp"
-	"github.com/astaxie/beego/orm"
 	"LichFresh/models"
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/utils"
+	"regexp"
 	"strconv"
 	"time"
 )
@@ -165,4 +165,12 @@ func (this *UserController) HandleActive() {
 	}
 
 	this.TplName = "login.html"
+}
+
+//退出登录
+func (this *UserController) HandleLogout() {
+	//删除session
+	this.DelSession("username")
+	//跳转页面
+	this.Redirect("/", 302)
 }

@@ -14,7 +14,7 @@
     <div class="header">
         <div class="welcome fl">欢迎来到天天生鲜!</div>
         <div class="fr">
-        {{if compare .userName ""}}
+        {{if compare .username ""}}
             <div class="login_btn fl">
                 <a href="login.html">登录</a>
                 <span>|</span>
@@ -22,7 +22,7 @@
             </div>
         {{else}}
             <div class="login_btn fl">
-                欢迎您：<em>{{.userName}}</em>
+                欢迎您：<em>{{.username}}</em>
                 <span>|</span>
                 <a href="/logout">退出</a>
             </div>
